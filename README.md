@@ -1,0 +1,1 @@
+Brain Task App is being deployed in the EKS

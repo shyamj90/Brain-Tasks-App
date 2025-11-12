@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bt-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: brain-task
+  template:
+    metadata:
+      labels:
+        app: brain-task
+    spec:
+      containers:
+        - name: brain-task
+          image: 082105002877.dkr.ecr.us-east-2.amazonaws.com/project1/brain-task:latest
+          ports:
+            - containerPort: 80
+      imagePullSecrets: 
+        - name: ecr-creds
