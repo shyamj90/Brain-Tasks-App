@@ -17,5 +17,3 @@ spec:
           image: 082105002877.dkr.ecr.us-east-2.amazonaws.com/project1/brain-task:latest
           ports:
             - containerPort: 80
-      imagePullSecrets: 
-        - name: ecr-creds
