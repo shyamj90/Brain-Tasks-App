@@ -1,0 +1,15 @@
+phases:
+  pre_build:
+    commands:
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 082105002877.dkr.ecr.us-east-2.amazonaws.com
+  build:
+    commands:
+      - docker build -t bt-app:$CODEBUILD_RESOLVED_SOURCE_VERSION .
+      - docker tag bt-app:$CODEBUILD_RESOLVED_SOURCE_VERSION 082105002877.dkr.ecr.us-east-2.amazonaws.com/bt-app:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build:
+    commands:
+      - docker push 082105002877.dkr.ecr.us-east-2.amazonaws.com/bt-app:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - sed -i "s|image:.*|image: 082105002877.dkr.ecr.us-east-2.amazonaws.com/bt-app:$CODEBUILD_RESOLVED_SOURCE_VERSION|" deployment.yaml
+artifacts:
+  files:
+    - deployment.yaml
