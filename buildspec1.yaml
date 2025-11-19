@@ -6,9 +6,7 @@ phases:
       python: 3.9
     commands:
       - echo Installing dependencies...
-      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.29.0/2024-07-10/bin/linux/amd64/kubectl
-      - chmod +x ./kubectl
-      - mv ./kubectl /usr/local/bin/
+      - sudo yum install -y amazon-eks-cli
       - kubectl version
       - pip install --upgrade awscli
 
