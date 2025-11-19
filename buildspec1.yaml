@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo Installing dependencies...
+      - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.29.0/2024-07-10/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl
+      - mv ./kubectl /usr/local/bin/
+      - pip install --upgrade awscli
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon EKS...
+      - aws eks update-kubeconfig --region us-east-2 --name my-eks-cluster
+      - kubectl get nodes
+
+  build:
+    commands:
+      - echo Deploying manifests...
+      - kubectl apply -f deployment.yaml
+      - kubectl apply -f loadBalancerSvc.yaml
+
+  post_build:
+    commands:
+      - echo Deployment complete!
