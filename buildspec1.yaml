@@ -14,7 +14,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon EKS...
-      - aws eks update-kubeconfig --region us-east-2 --name my-eks-cluster
+      - aws eks update-kubeconfig --region us-east-2 --name ssj-eks1
       - kubectl get nodes
 
   build:
