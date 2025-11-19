@@ -16,3 +16,4 @@ artifacts:
   files:
     - deployment.yaml
     - loadBalancerSvc.yaml
+    - buildspec1.yaml
